@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SystemController;
+use App\Models\System;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+// Route::get('/systems', function () {
+//     return System::all();
+//     // return view('welcome');
+// });
+Route::resource('/systems', SystemController::class);
 Route::get('/trying', function () {
     return view('trying');
 });
