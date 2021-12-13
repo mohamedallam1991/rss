@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Unit;
+use App\Models\System;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SystemFactory extends Factory
@@ -14,6 +16,7 @@ class SystemFactory extends Factory
     public function definition()
     {
         return [
+            'unit_id' => Unit::factory()->create()->id,
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraph(4),
             'status' => $this->faker->randomElement(['working', 'infected']),
