@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
+use App\Models\User;
 use App\Models\Audit;
 use App\Models\System;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -21,5 +22,13 @@ class AuditControllerTest extends TestCase
         $response = $this->get('/audits');
         $response->assertSee($audits->random()->type);
         $response->assertSee($audits->random()->code);
+    }
+
+    /** @test */
+    public function relationship()
+    {
+        $audit = Audit::factory()->create();
+        $this->assertInstanceOf(User::class, $audit->user);
+        $this->assertInstanceOf(System::class, $audit->system);
     }
 }

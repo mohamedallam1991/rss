@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use Tests\TestCase;
 use App\Models\Unit;
 use App\Models\User;
+use App\Models\Audit;
 use App\Models\System;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -26,6 +27,15 @@ class SystemsControllerTest extends TestCase
         $response->assertSee($systems->random()->observation);
         $response->assertSee($systems->random()->children);
         $this->assertCount(5, System::all());
+    }
+
+    /** @test */
+    public function relationship()
+    {
+        $system = System::factory()->create();
+        Audit::factory()->create(['system_id' => $system->id]);
+        // $this->assertInstanceOf(User::class, $audit->user);
+        $this->assertInstanceOf(Audit::class, $system->audits->first());
     }
 
 
