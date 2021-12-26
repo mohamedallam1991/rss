@@ -15,7 +15,7 @@ class System extends Model
 
     protected $casts = ['children' => 'boolean'];
 
-    public function unit():BelongsTo
+    public function structure():BelongsTo
     {
         return $this->belongsTo(Structure::class);
     }

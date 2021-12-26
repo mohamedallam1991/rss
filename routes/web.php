@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\AuditController;
 use App\Http\Controllers\SystemController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StructureController;
 
 /*
@@ -28,9 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/audits', AuditController::class);
 });
 
-Route::get('/trying', function () {
-    return view('trying');
-});
+Route::get('/rss', [DashboardController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
