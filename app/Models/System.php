@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Unit;
 use App\Models\Audit;
+use App\Models\Structure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +17,7 @@ class System extends Model
 
     public function unit():BelongsTo
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Structure::class);
     }
 
     public function audits(): HasMany

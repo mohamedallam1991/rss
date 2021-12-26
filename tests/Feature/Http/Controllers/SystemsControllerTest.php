@@ -3,9 +3,9 @@
 namespace Tests\Feature\Http\Controllers;
 
 use Tests\TestCase;
-use App\Models\Unit;
 use App\Models\User;
 use App\Models\Audit;
+use App\Models\Structure;
 use App\Models\System;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -51,7 +51,7 @@ class SystemsControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
         $response = $this->post('/systems', [
-                'unit_id' => Unit::factory()->create()->id,
+                'structure_id' => Structure::factory()->create()->id,
                'name' => 'system MacOs',
                'description' => 'Very well secure and no infections',
                'status' => 'working',

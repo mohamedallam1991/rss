@@ -15,6 +15,7 @@ class AuditController extends Controller
      */
     public function index()
     {
+        // we order them by last created
         return Audit::all();
     }
 
@@ -47,6 +48,7 @@ class AuditController extends Controller
      */
     public function show(Audit $audit)
     {
+        return $audit->toArray();
         //
     }
 

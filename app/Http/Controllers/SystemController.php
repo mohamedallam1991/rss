@@ -21,7 +21,7 @@ class SystemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'unit_id' => 'required|integer',
+            'structure_id' => 'required|integer',
             'name' => 'required|max:255',
             'description' => 'required|max:255',
             'status' => 'required',
@@ -31,7 +31,7 @@ class SystemController extends Controller
 
 
         System::insert([
-            'unit_id' => $validated['unit_id'],
+            'structure_id' => $validated['structure_id'],
             'name' => $validated['name'],
             'description' => $validated['description'],
             'status' => $validated['status'],
@@ -42,6 +42,15 @@ class SystemController extends Controller
 
     public function show(System $system)
     {
-        return $system;
+        // dd($system);
+        $audits = $system->audits;
+        dd($audits);
+        // echo $audits;
+        // dd($audits);
+        return $system->toArray();
     }
+
+    // units
+        // systems
+            //audits
 }

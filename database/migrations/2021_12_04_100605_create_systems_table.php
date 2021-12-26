@@ -15,7 +15,8 @@ class CreateSystemsTable extends Migration
     {
         Schema::create('systems', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('unit_id');
+            // $table->unsignedInteger('unit_id')->nullable();
+            $table->unsignedInteger('structure_id')->nullable();
             $table->string('name');
             $table->text('description');
             $table->enum('status', ['working', 'infected']);

@@ -24,7 +24,7 @@ class StoreUnitRequest extends FormRequest
     public function rules()
     {
         return [
-            'structure' => 'required|max:255',
+            'unit' => 'required|max:255',
             'division' => 'required|max:255',
             'facade' => 'required|max:255',
         ];

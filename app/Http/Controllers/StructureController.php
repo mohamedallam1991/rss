@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
+use App\Models\Structure;
 use App\Models\Unit;
 
-class UnitController extends Controller
+class StructureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class UnitController extends Controller
      */
     public function index()
     {
-        return Unit::all();
+        return Structure::all();
     }
 
     /**
@@ -36,7 +37,7 @@ class UnitController extends Controller
      */
     public function store(StoreUnitRequest $request)
     {
-        Unit::insert($request->validated());
+        Structure::insert($request->validated());
     }
 
     /**
@@ -45,11 +46,11 @@ class UnitController extends Controller
      * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function show(Unit $unit)
+    public function show(Structure $structure)
     {
-        $systems = $unit->systems;
+        $systems = $structure->systems;
         // echo($systems);
-        return $unit;
+        return $structure;
         // return $unit, $systems;
     }
 
@@ -59,7 +60,7 @@ class UnitController extends Controller
      * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Unit $unit)
+    public function edit(Structure $structure)
     {
         //
     }
@@ -71,7 +72,7 @@ class UnitController extends Controller
      * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUnitRequest $request, Unit $unit)
+    public function update(UpdateUnitRequest $request, Structure $structure)
     {
         //
     }
@@ -82,8 +83,8 @@ class UnitController extends Controller
      * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Unit $unit)
+    public function destroy(Structure $structure)
     {
-        $unit->delete();
+        $structure->delete();
     }
 }

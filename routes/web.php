@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuditController;
-use App\Http\Controllers\SystemController;
-use App\Http\Controllers\UnitController;
 use App\Models\System;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\AuditController;
+use App\Http\Controllers\SystemController;
+use App\Http\Controllers\StructureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/units', UnitController::class);
+    Route::resource('/structures', StructureController::class);
     Route::resource('/systems', SystemController::class);
     Route::resource('/audits', AuditController::class);
 });

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Audit;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $units = \App\Models\Unit::factory(10)->create();
-        foreach ($units as $unit) {
-            \App\Models\System::factory()->count(5)->create(['unit_id' => $unit->id]);
+        $structures = \App\Models\Structure::factory(10)->create();
+        foreach ($structures as $structure) {
+            $systems = \App\Models\System::factory()->count(5)->create(['structure_id' => $structure->id]);
+            foreach ($systems as $system) {
+                $audits = \App\Models\Audit::factory()->count(5)->create(['system_id' => $system->id]);
+            }
         }
     }
 }

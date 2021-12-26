@@ -6,25 +6,21 @@ use Tests\TestCase;
 use App\Models\Unit;
 use App\Models\User;
 use App\Models\System;
+use App\Models\Structure;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UnitControllerTest extends TestCase
 {
-    public function login()
-    {
-        $user = User::factory()->create();
-        $this->user = $user;
-        $this->actingAs($user);
-    }
+
 
     /** @test */
     public function we_can_visit_index_page(): void
     {
-        $units = Unit::factory()->count(5)->create();
+        $structures = Structure::factory()->count(5)->create();
         $this->login();
-        $response = $this->get('/units');
-        $response->assertSee($units->random()->structure);
+        $response = $this->get('/structures');
+        $response->assertSee($structures->random()->unit);
     }
 
     /** @test */
@@ -32,14 +28,14 @@ class UnitControllerTest extends TestCase
     {
         $this->login();
         // visit create page
-        $response = $this->post('/units', [
-            'structure' => 'Royal Tulip',
+        $response = $this->post('/structures', [
+            'unit' => 'Royal Tulip',
             'division' => 'East of Algeria',
             'facade' => 'hotel',
         ]);
-        $unit = Unit::first();
+        $structure = Structure::first();
 
-        $this->assertSame('Royal Tulip', $unit->structure);
+        $this->assertSame('Royal Tulip', $structure->unit);
     }
 
     /** @test */
@@ -52,24 +48,24 @@ class UnitControllerTest extends TestCase
     public function we_can_see_a_single_unit(): void
     {
         $this->login();
-        $units = Unit::factory()->count(5)->create();
-        System::factory()->count(4)->create(['unit_id' => 3]);
-        $response = $this->get('/units/3');
-        $response->assertSee(Unit::find(3)->division);
-        $response->assertSee(Unit::find(3)->facade);
-        $response->assertSee(Unit::find(3)->structure);
-        $this->assertCount(4, Unit::find(3)->systems);
+        $structure = Structure::factory()->count(5)->create();
+        System::factory()->count(4)->create(['structure_id' => 3]);
+        $response = $this->get('/structures/3');
+        $response->assertSee(Structure::find(3)->division);
+        $response->assertSee(Structure::find(3)->facade);
+        $response->assertSee(Structure::find(3)->unit);
+        $this->assertCount(4, Structure::find(3)->systems);
     }
 
     /** @test */
     public function we_can_delete_a_unit(): void
     {
         $this->login();
-        $units = Unit::factory()->count(5)->create();
-        $this->assertCount(5, $units);
-        $response = $this->delete('/units/4');
-        $this->assertCount(4, Unit::get());
-        $response = $this->delete('/units/3');
-        $this->assertCount(3, Unit::get());
+        $structures = Structure::factory()->count(5)->create();
+        $this->assertCount(5, $structures);
+        $response = $this->delete('/structures/4');
+        $this->assertCount(4, Structure::get());
+        $response = $this->delete('/structures/3');
+        $this->assertCount(3, Structure::get());
     }
 }
